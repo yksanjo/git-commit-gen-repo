@@ -1,0 +1,20 @@
+#!/bin/bash
+# Git Commit Message Generator - Shell wrapper
+# Place this in your PATH (e.g., /usr/local/bin/git-commit-gen or ~/bin/git-commit-gen)
+
+# Find the Python script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_SCRIPT="$SCRIPT_DIR/git-commit-gen.py"
+
+# If not found in same directory, try common locations
+if [[ ! -f "$PYTHON_SCRIPT" ]]; then
+    PYTHON_SCRIPT="$HOME/git-commit-gen.py"
+fi
+
+if [[ ! -f "$PYTHON_SCRIPT" ]]; then
+    echo "Error: git-commit-gen.py not found"
+    exit 1
+fi
+
+# Run the Python script with all arguments
+python3 "$PYTHON_SCRIPT" "$@"
